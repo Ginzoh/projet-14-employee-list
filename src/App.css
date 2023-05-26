@@ -1,0 +1,70 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employeeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+}
+
+.address {
+  margin-top: 10px;
+}
+
+select {
+  padding: 3px 3px;
+  font-size: 16px;
+}
+
+.pageButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.entrySelect {
+  display: flex;
+  gap: 5px;
+}
+
+.entrySelect label {
+  margin: 0;
+}
+
+.entryNumbpage {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.selectInput {
+  align-self: flex-start;
+}
+
+.searchFilter {
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.homeLink {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+h1,
+h2 {
+  margin: 5px 0px;
+}
