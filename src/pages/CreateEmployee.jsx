@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { states } from '../data/states';
 import TestModal from 'my-modal-lib-pro/dist/index';
+import SelectInputCr from '../components/SelectInputCr';
 import ReactDatePicker from 'react-datepicker';
-import 'my-modal-lib-pro/dist/index.css'
 import 'react-datepicker/dist/react-datepicker.css';
+import 'my-modal-lib-pro/dist/index.css'
 
 const CreateEmployee = () => {
   const [employee, setEmployee] = useState({
@@ -24,6 +25,17 @@ const CreateEmployee = () => {
   maxDob.setFullYear(maxDob.getFullYear());
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // States for the SelectInputCr component
+  const stateOptions = states.map(state => ({ value: state.abbreviation, label: state.name }));
+
+  const departmentOptions = [
+    { value: 'Sales', label: 'Sales' },
+    { value: 'Marketing', label: 'Marketing' },
+    { value: 'Engineering', label: 'Engineering' },
+    { value: 'Human Resources', label: 'Human Resources' },
+    { value: 'Legal', label: 'Legal' },
+  ];
 
   const handleChange = (event) => {
     setEmployee({ ...employee, [event.target.name]: event.target.value });
@@ -112,31 +124,26 @@ const CreateEmployee = () => {
               <input id="city" name="city" type="text" value={employee.city} onChange={handleChange} />
               {errors.city && <div style={{ color: 'red' }}>{errors.city}</div>}
 
-              <label htmlFor="state">State</label>
-              <select name="state" id="state" value={employee.state} onChange={handleChange}>
-                <option value="">Select a state...</option>
-                {states.map((state, index) => (
-                  <option key={index} value={state.abbreviation}>{state.name}</option>
-                ))}
-              </select>
-              {errors.state && <div style={{ color: 'red' }}>{errors.state}</div>}
-
+              <SelectInputCr
+                name="state"
+                value={employee.state}
+                onChange={handleChange}
+                label="State"
+                errors={errors.state}
+                options={stateOptions}
+              />
               <label htmlFor="zip-code">Zip Code</label>
               <input id="zip-code" name="zip" type="number" value={employee.zip} onChange={handleChange} />
               {errors.zip && <div style={{ color: 'red' }}>{errors.zip}</div>}
             </fieldset>
-
-            <label htmlFor="department">Department</label>
-            <select name="department" id="department" value={employee.department} onChange={handleChange}>
-              <option value="">Select a department...</option>
-              <option value="Sales">Sales</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Human Resources">Human Resources</option>
-              <option value="Legal">Legal</option>
-            </select>
-            {errors.department && <div style={{ color: 'red' }}>{errors.department}</div>}
-
+            <SelectInputCr
+              name="department"
+              value={employee.department}
+              onChange={handleChange}
+              label="Department"
+              errors={errors.department}
+              options={departmentOptions}
+            />
             <div className="button-container">
               <button type='submit'>Save</button>
             </div>
