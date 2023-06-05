@@ -7,7 +7,7 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'my-modal-lib-pro/dist/index.css'
 
-const CreateEmployee = () => {
+const CreateEmployee = ({ employees, setEmployees }) => {
   const [employee, setEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -62,10 +62,9 @@ const CreateEmployee = () => {
     return Object.keys(newErrors).length === 0;
   }
 
-  const saveEmployee = () => {
+  const saveEmployee = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
 
     // Convert dob and startDate to string before pushing to employees
     const employeeToSave = {
@@ -74,8 +73,7 @@ const CreateEmployee = () => {
       startDate: new Intl.DateTimeFormat('en-US').format(employee.startDate)
     };
 
-    employees.push(employeeToSave);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    setEmployees([...employees, employeeToSave]);
     setModalIsOpen(true);
   };
 

@@ -7,13 +7,12 @@ import { Link } from 'react-router-dom';
 import { GlobalFilter } from '../components/GlobalFilter';
 import { SelectInput } from '../components/SelectInput';
 
-const EmployeeList = () => {
+const EmployeeList = ({ employees }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const employeesData = JSON.parse(localStorage.getItem('employees')) || [];
-    setData(employeesData);
-  }, []);
+    setData(employees);
+  }, [employees]);
 
   const columns = useMemo(
     () => [
